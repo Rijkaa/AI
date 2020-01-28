@@ -57,63 +57,6 @@ Y_train = lyv
 X_test = txv
 Y_test = tyv
 
-#model = Sequential()
-#model.add(Dense(N_HIDDEN, input_dim=2))
-#model.add(Activation('relu'))
-#model.add(Dropout(DROPOUT))
-#model.add(Dense(N_HIDDEN))
-#model.add(Activation('relu'))
-#model.add(Dropout(DROPOUT))
-#model.add(Dense(NB_CLASSES))
-#model.add(Activation('softmax'))
-#model.summary()
-#model.compile(loss='categorical_crossentropy', optimizer=OPTIMIZER, metrics=['accuracy'])
-#reduce_lr = ReduceLROnPlateau(monitor='val_acc', factor=0.9, patience=25, min_lr=0.000001, verbose=1)
-#checkpointer = ModelCheckpoint(filepath="test.hdf5", verbose=1, save_best_only=True)
-#history = model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=NB_EPOCH, verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
-#history = model.fit(X_train, Y_train,
-#          nb_epoch = 1,
-#          batch_size = 128,
-#          verbose=1,
-#          validation_data=(X_test, Y_test),
-#          callbacks=[reduce_lr, checkpointer],
-#          shuffle=True)
-#score = model.evaluate(X_test, Y_test, verbose=VERBOSE)
-#print("Test score:", score[0])
-#print("Test accuracy:", score[1])
-
-
-
-
-#model = Sequential()
-#model.add(Dense(8))
-   #             activity_regularizer=regularizers.l2(0.01)))
-#model.add(BatchNormalization())
-#model.add(LeakyReLU())
-
-#model.add(Dropout(0.25))
-#model.add(Dense(8))
-       #         activity_regularizer=regularizers.l2(0.01)))
-#model.add(BatchNormalization())
-#model.add(LeakyReLU())
-#model.add(Dense(2))
-#model.add(Activation('softmax'))
-
-#opt = Nadam(lr=0.001)
-
-#reduce_lr = ReduceLROnPlateau(monitor='val_acc', factor=0.9, patience=25, min_lr=0.000001, verbose=1)
-#checkpointer = ModelCheckpoint(filepath="test.hdf5", verbose=1, save_best_only=True)
-#model.compile(optimizer=opt,
-     #         loss='categorical_crossentropy',
-      #        metrics=['accuracy'])
-#nb_epoch = 100
-#history = model.fit(X_train, Y_train,
-#          validation_split=0.33,
-#          epochs = nb_epoch,
-#          batch_size = 100,
-#          verbose=1,
-#          validation_data=(X_test, Y_test))
-#          callbacks=[reduce_lr, checkpointer])
 
 model = Sequential()
 model.add(Dense(N_HIDDEN))
@@ -126,38 +69,19 @@ model.add(Dense(NB_CLASSES))
 model.add(Activation('softmax'))
 model.compile(loss='cce', optimizer=Nadam(lr=0.001), metrics=['accuracy'])
 history = model.fit(X_train, Y_train, batch_size=BATCH_SIZE, epochs=NB_EPOCH, verbose=VERBOSE, validation_split=VALIDATION_SPLIT)
-#score = model.evaluate(X_test, Y_test, verbose=VERBOSE)
-#print("Test score:", score[0])
-#print("Test accuracy:", score[1])
-
 
 plt.figure()
 plt.plot(history.history['loss'])
-#plt.plot(history.history['val_loss'])
 plt.title('model loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='best')
-fig, ax = plt.subplots()
 plt.show()
-fig.savefig('loss')
 
 plt.figure()
 plt.plot(history.history['accuracy'])
-#plt.plot(history.history['val_accuracy'])
 plt.title('model accuracy')
 plt.ylabel('acc')
-plt.xlabel('epoch')
-#plt.legend(['train', 'test'], loc='best')
-plt.legend(['train', 'test'], loc='best')
-fig, ax = plt.subplots()
-plt.show()
-fig.savefig('acc')
-
-plt.figure()
-plt.plot(history.history['time'])
-plt.title('time')
-plt.ylabel('time')
 plt.xlabel('epoch')
 plt.legend(['train', 'test'], loc='best')
 plt.show()
